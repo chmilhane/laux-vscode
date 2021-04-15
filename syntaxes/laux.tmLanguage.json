@@ -263,7 +263,7 @@
 			"name": "constant.other.placeholder.laux"
 		},
 		{
-			"match": "\\b(break|do|else|for|if|elseif|goto|return|then|repeat|while|until|end|function|local|in|async|public|class|static|private|await|extends|import|from|as|of|stopif|breakif|continueif|constructor)\\b",
+			"match": "\\b(break|do|else|for|if|elseif|goto|return|continue|then|repeat|while|until|end|function|local|in|async|public|class|static|private|await|extends|import|from|as|of|stopif|breakif|continueif|constructor)\\b",
 			"name": "keyword.control.laux"
 		},
 		{
