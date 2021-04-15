@@ -25,7 +25,7 @@
 	{
 		"body":
 		[
-			"for ${1:key}, ${2:value} in pairs(${3:table}) do",
+			"for ${1:key}, ${2:value} of ${3:table} do",
 			"\t$0",
 			"end"
 		],
