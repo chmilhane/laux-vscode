@@ -2,7 +2,7 @@
     "name": "laux",
     "displayName": "laux",
     "description": "Laux language support for Visual Studio Code",
-	"icon": "https://raw.githubusercontent.com/chmilhane/Laux/master/assets/laux.png",
+    "icon": "https://raw.githubusercontent.com/chmilhane/Laux/master/assets/laux.png",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.55.0"
