@@ -1,0 +1,328 @@
+{
+	"name": "Laux",
+	"scopeName": "source.laux",
+	"patterns": [
+		{
+			"name": "punctuation.separator.comma.laux",
+			"match": ","
+		},
+		{
+			"name": "punctuation.terminator.statement.laux",
+			"match": ";"
+		},
+		{
+			"name": "punctuation.terminator.statement.laux",
+			"match": ":"
+		},
+		{
+			"name": "meta.template.expression.laux",
+			"begin": "\\$\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.template-expression.begin.laux"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.template-expression.end.laux"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			],
+			"contentName": "meta.embedded.line.laux"
+		},
+		{
+			"begin": "\\b(?:(local)\\s+)?(function)\\s*(?:\\s+([a-zA-Z_][a-zA-Z0-9_]*(?:([\\.:])[a-zA-Z_][a-zA-Z0-9_]*)?)\\s*)?(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.laux"
+				},
+				"2": {
+					"name": "keyword.control.laux"
+				},
+				"3": {
+					"name": "entity.name.function.laux"
+				},
+				"4": {
+					"name": "punctuation.separator.parameter.laux"
+				},
+				"5": {
+					"name": "punctuation.definition.parameters.begin.laux"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.laux"
+				}
+			},
+			"name": "meta.function.laux",
+			"patterns": [
+				{
+					"match": "[a-zA-Z_][a-zA-Z0-9_]*",
+					"name": "variable.parameter.function.laux"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.arguments.laux"
+				}
+			]
+		},
+		{
+			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(?![pPeE.0-9])",
+			"name": "constant.numeric.integer.hexadecimal.laux"
+		},
+		{
+			"match": "(?<![\\w\\d.])0[xX][0-9A-Fa-f]+(\\.[0-9A-Fa-f]+)?([eE]-?\\d*)?([pP][-+]\\d+)?",
+			"name": "constant.numeric.float.hexadecimal.laux"
+		},
+		{
+			"match": "(?<![\\w\\d.])\\d+(?![pPeE.0-9])",
+			"name": "constant.numeric.integer.laux"
+		},
+		{
+			"match": "(?<![\\w\\d.])\\d+(\\.\\d+)?([eE]-?\\d*)?",
+			"name": "constant.numeric.float.laux"
+		},
+		{
+			"begin": "`",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.laux"
+				}
+			},
+			"end": "`",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.laux"
+				}
+			},
+			"name": "string.quoted.single.laux",
+			"patterns": [
+				{
+					"include": "#escaped_char"
+				}
+			]
+		},
+		{
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.laux"
+				}
+			},
+			"end": "'",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.laux"
+				}
+			},
+			"name": "string.quoted.single.laux",
+			"patterns": [
+				{
+					"include": "#escaped_char"
+				}
+			]
+		},
+		{
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.laux"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.laux"
+				}
+			},
+			"name": "string.quoted.double.laux",
+			"patterns": [
+				{
+					"include": "#escaped_char"
+				}
+			]
+		},
+		{
+			"begin": "(?<=\\.cdef)\\s*(\\[(=*)\\[)",
+			"beginCaptures": {
+				"0": {
+					"name": "string.quoted.other.multiline.laux"
+				},
+				"1": {
+					"name": "punctuation.definition.string.begin.laux"
+				}
+			},
+			"contentName": "meta.embedded.laux",
+			"end": "(\\]\\2\\])",
+			"endCaptures": {
+				"0": {
+					"name": "string.quoted.other.multiline.laux"
+				},
+				"1": {
+					"name": "punctuation.definition.string.end.laux"
+				}
+			},
+			"patterns": [
+				{
+					"include": "source.c"
+				}
+			]
+		},
+		{
+			"begin": "(?<!--)\\[(=*)\\[",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.laux"
+				}
+			},
+			"end": "\\]\\1\\]",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.laux"
+				}
+			},
+			"name": "string.quoted.other.multiline.laux"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.comment.laux"
+				}
+			},
+			"match": "\\A(#!).*$\\n?",
+			"name": "comment.line.shebang.laux"
+		},
+		{
+			"begin": "(^[ \\t]+)?(?=--)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.leading.laux"
+				}
+			},
+			"end": "(?!\\G)((?!^)[ \\t]+\\n)?",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.trailing.laux"
+				}
+			},
+			"patterns": [
+				{
+					"begin": "--\\[(=*)\\[",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.laux"
+						}
+					},
+					"end": "\\]\\1\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.laux"
+						}
+					},
+					"name": "comment.block.laux"
+				},
+				{
+					"begin": "--",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.laux"
+						}
+					},
+					"end": "\\n",
+					"name": "comment.line.double-dash.laux"
+				}
+			]
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.control.goto.laux"
+				},
+				"2": {
+					"name": "constant.other.placeholder.laux"
+				}
+			},
+			"match": "\\b(goto)\\s+([a-zA-Z_][a-zA-Z0-9_]*)"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.label.begin.laux"
+				},
+				"2": {
+					"name": "punctuation.definition.label.end.laux"
+				}
+			},
+			"match": "(::)[a-zA-Z_][a-zA-Z0-9_]*(::)",
+			"name": "constant.other.placeholder.laux"
+		},
+		{
+			"match": "\\b(break|do|else|for|if|elseif|goto|return|then|repeat|while|until|end|function|local|in|async|public|class|static|private|await|extends|import|from|as|of|stopif|breakif|continueif|constructor)\\b",
+			"name": "keyword.control.laux"
+		},
+		{
+			"match": "(?<![^.]\\.|:)\\b(false|nil|true|_G|_VERSION|math\\.(pi|huge))\\b|(?<![.])\\.{3}(?!\\.)",
+			"name": "constant.language.laux"
+		},
+		{
+			"match": "(?<![^.]\\.|:)\\b(_get|_set|self|this)\\b",
+			"name": "variable.language.self.laux"
+		},
+		{
+			"match": "(?<![^.]\\.|:)\\b(assert|collectgarbage|dofile|error|getfenv|getmetatable|ipairs|loadfile|loadstring|module|next|pairs|pcall|print|rawequal|rawget|rawset|require|select|setfenv|setmetatable|tonumber|tostring|type|unpack|xpcall)\\b(?=\\s*(?:[({\"']|\\[\\[))",
+			"name": "support.function.laux"
+		},
+		{
+			"match": "(?<![^.]\\.|:)\\b(coroutine\\.(create|resume|running|status|wrap|yield)|string\\.(byte|char|dump|find|format|gmatch|gsub|len|lower|match|rep|reverse|sub|upper)|table\\.(concat|insert|maxn|remove|sort)|math\\.(abs|acos|asin|atan2?|ceil|cosh?|deg|exp|floor|fmod|frexp|ldexp|log|log10|max|min|modf|pow|rad|random|randomseed|sinh?|sqrt|tanh?)|io\\.(close|flush|input|lines|open|output|popen|read|tmpfile|type|write)|os\\.(clock|date|difftime|execute|exit|getenv|remove|rename|setlocale|time|tmpname)|package\\.(cpath|loaded|loadlib|path|preload|seeall)|debug\\.(debug|[gs]etfenv|[gs]ethook|getinfo|[gs]etlocal|[gs]etmetatable|getregistry|[gs]etupvalue|traceback))\\b(?=\\s*(?:[({\"']|\\[\\[))",
+			"name": "support.function.library.laux"
+		},
+		{
+			"match": "\\b(and|or|not)\\b",
+			"name": "keyword.operator.laux"
+		},
+		{
+			"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*(?:[({\"']|\\[\\[))",
+			"name": "support.function.any-method.laux"
+		},
+		{
+			"match": "(?<=[^.]\\.|:)\\b([a-zA-Z_][a-zA-Z0-9_]*)",
+			"name": "variable.other.laux"
+		},
+		{
+			"match": "\\+|-|%|#|\\*|\\?|\\&|\\{|\\}|\\!|\\||\\/|\\^|==?|~=|<=?|>=?|(?<!\\.)\\.{2}(?!\\.)",
+			"name": "keyword.operator.laux"
+		}
+	],
+	"repository": {
+		"escaped_char": {
+			"patterns": [
+				{
+					"match": "\\\\[abfnrtvz\\\\\"'\\n]",
+					"name": "constant.character.escape.laux"
+				},
+				{
+					"match": "\\\\\\d{1,3}",
+					"name": "constant.character.escape.byte.laux"
+				},
+				{
+					"match": "\\\\x[0-9A-Fa-f][0-9A-Fa-f]",
+					"name": "constant.character.escape.byte.laux"
+				},
+				{
+					"match": "\\\\u\\{[0-9A-Fa-f]+\\}",
+					"name": "constant.character.escape.unicode.laux"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.character.escape.laux"
+				}
+			]
+		}
+	}
+}

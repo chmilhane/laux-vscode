@@ -1,0 +1,68 @@
+{
+    "name": "laux",
+    "displayName": "laux",
+    "description": "Laux language support for Visual Studio Code",
+	"icon": "assets/laux.png",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.55.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "contributes": {
+        "snippets": [
+			{
+				"language": "laux",
+				"path": "./snippets/custom.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/enums.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/classFuncs.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/funcs.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/globals.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/hooks.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/panelFuncs.json"
+			},
+			{
+				"language": "laux",
+				"path": "./snippets/keywords.json"
+			}
+        ],
+		"languages": [
+			{
+				"id": "laux",
+				"aliases": [
+					"Laux"
+				],
+				"extensions": [
+					".laux"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "laux",
+				"scopeName": "source.laux",
+				"path": "./syntaxes/laux.tmLanguage.json"
+			}
+		]
+    }
+}
